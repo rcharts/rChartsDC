@@ -1,0 +1,35 @@
+<!doctype HTML>
+<html>
+  <meta charset = 'utf-8'>
+  <head>
+    {{# assets.css }}
+    <link rel='stylesheet' href='{{{ . }}}'>
+    {{/ assets.css }}
+    
+    {{# assets.jshead }}
+    <script src='{{{ . }}}' type='text/javascript'></script>
+    {{/ assets.jshead }}
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: {{params.width}}px;
+      height: {{params.height}}px;
+    }  
+    </style>
+    
+  </head>
+  <body>
+    <div class='container' id='main-container'>
+     <div class='content'>
+       <div class='container' style='font: 12px sans-serif;'>
+       
+           {{{ script }}}
+           
+       </div>
+     </div>
+    </div>
+  </body>
+</html>

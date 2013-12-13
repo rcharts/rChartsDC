@@ -1,0 +1,58 @@
+<div class='container' id='main-container'>
+  <div class='content'>
+    <div class='container' style='font: 12px sans-serif;'>
+
+{{# rows }}
+<div class='row'>
+  {{# charts }}
+  <div class={{ class }} id='{{ id }}'>
+    <h4> {{ title }} </h4>
+  </div>
+  {{/ charts }}
+</div>
+{{/ rows}}
+
+    </div>
+  </div>
+</div>
+
+<style>
+.rChart {
+  display: none;
+}
+</style>
+
+<script>
+d3.csv("https://rawgithub.com/vincentarelbundock/Rdatasets/master/csv/datasets/quakes.csv", function (data) {
+  // console.log(data)
+  // format our data
+  
+  data.forEach(function(d) { 
+    d.lat   = +d.lat;
+    d.long  = +d.long;
+    d.mag   = d3.round(+d.mag,1);
+    d.depth = d3.round(+d.depth,0);
+  });
+  
+  var facts = crossfilter(data);
+  
+  
+  var chart1 = dc.barChart("#chart1");
+  var chart1Dim = facts.dimension(function (d) {return d.mag});
+  var chart1Group = chart1Dim.group().reduceSum(function(d) { return d.mag; });
+  chart1.width(480)
+    .height(150)
+    .margins({top: 10, right: 10, bottom: 20, left: 40})
+    .dimension(chart1Dim)  							// the values across the x axis
+    .group(chart1Group)							// the values on the y axis
+	.transitionDuration(500)
+    .centerBar(true)	
+	.gap(55)                      
+    .x(d3.scale.linear().domain([0.5, 7.5]))
+	.elasticY(true)
+	.xAxis().tickFormat(function(v) {return v;});
+  
+  dc.renderAll();
+  console.log(data)
+})
+</script>

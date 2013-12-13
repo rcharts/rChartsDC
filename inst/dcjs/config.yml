@@ -1,0 +1,10 @@
+dcjs:
+  jshead: 
+    - "js/d3.js"
+    - "js/crossfilter.js"
+    - "js/dc.js"
+    - "js/jquery-1.9.1.min.js"
+    - "js/bootstrap.min.js"
+  css:
+    - "css/bootstrap.min.css"
+    - "css/dc.css"

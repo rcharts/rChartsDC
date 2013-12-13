@@ -1,0 +1,3 @@
+exportPattern("^[[:alpha:]]+")
+import(rCharts)
+import(RJSONIO)
